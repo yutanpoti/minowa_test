@@ -1,0 +1,800 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css"><link rel="stylesheet" href="css/L.Control.Locate.min.css">
+        <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <style>
+        html, body, #map {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+        </style>
+        <title></title>
+    </head>
+    <body>
+        <div id="map">
+        </div>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script><script src="js/L.Control.Locate.min.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="data/santi_jisuberi_8.js"></script>
+        <script src="data/santi_houkai_9.js"></script>
+        <script src="data/santi_ryuushutu_10.js"></script>
+        <script src="data/kyuukeisha_11.js"></script>
+        <script src="data/yellow_doshasaigaikeikaikuiki_12.js"></script>
+        <script src="data/red_doshasaigaitokubetukeikaikuiki_13.js"></script>
+        <script src="data/sabousiteiti_14.js"></script>
+        <script src="data/kamiina_15.js"></script>
+        <script>
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:20, minZoom:10
+        }).fitBounds([[35.88511513215693,137.8989998446751],[35.954023851038166,138.0574526796739]]);
+        var hash = new L.Hash(map);
+        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
+        var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
+        L.control.locate({locateOptions: {maxZoom: 19}}).addTo(map);
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+        }
+        map.createPane('pane__0');
+        map.getPane('pane__0').style.zIndex = 400;
+        var layer__0 = L.tileLayer('https://cyberjapandata.gsi.go.jp/xyz/pale/{z}/{x}/{y}.png', {
+            pane: 'pane__0',
+            opacity: 1.0,
+            attribution: '',
+            minZoom: 10,
+            maxZoom: 20,
+            minNativeZoom: 7,
+            maxNativeZoom: 15
+        });
+        layer__0;
+        map.addLayer(layer__0);
+        map.createPane('pane__1');
+        map.getPane('pane__1').style.zIndex = 401;
+        var layer__1 = L.tileLayer('https://cyberjapandata.gsi.go.jp/xyz/seamlessphoto/{z}/{x}/{y}.jpg', {
+            pane: 'pane__1',
+            opacity: 1.0,
+            attribution: '',
+            minZoom: 10,
+            maxZoom: 20,
+            minNativeZoom: 2,
+            maxNativeZoom: 18
+        });
+        layer__1;
+        map.createPane('pane_CS_2');
+        map.getPane('pane_CS_2').style.zIndex = 402;
+        var layer_CS_2 = L.tileLayer('https://tile.geospatial.jp/CS/VER2/{z}/{x}/{y}.png', {
+            pane: 'pane_CS_2',
+            opacity: 1.0,
+            attribution: '',
+            minZoom: 10,
+            maxZoom: 20,
+            minNativeZoom: 0,
+            maxNativeZoom: 18
+        });
+        layer_CS_2;
+        map.createPane('pane__3');
+        map.getPane('pane__3').style.zIndex = 403;
+        var layer__3 = L.tileLayer('https://gbank.gsj.jp/seamless/v2/api/1.2/tiles/{z}/{y}/{x}.png', {
+            pane: 'pane__3',
+            opacity: 0.6,
+            attribution: '',
+            minZoom: 10,
+            maxZoom: 20,
+            minNativeZoom: 3,
+            maxNativeZoom: 13
+        });
+        layer__3;
+        map.createPane('pane__4');
+        map.getPane('pane__4').style.zIndex = 404;
+        var layer__4 = L.tileLayer('https://jmapweb3v.bosai.go.jp/map/xyz/landslide/{z}/{x}/{y}.png', {
+            pane: 'pane__4',
+            opacity: 1.0,
+            attribution: '',
+            minZoom: 10,
+            maxZoom: 20,
+            minNativeZoom: 5,
+            maxNativeZoom: 15
+        });
+        layer__4;
+        map.createPane('pane_zoning_minowa_test_5');
+        map.getPane('pane_zoning_minowa_test_5').style.zIndex = 405;
+        var img_zoning_minowa_test_5 = 'data/zoning_minowa_test_5.png';
+        var img_bounds_zoning_minowa_test_5 = [[35.87985355408642,137.89289508975907],[35.96270807471774,138.09109769912254]];
+        var layer_zoning_minowa_test_5 = new L.imageOverlay(img_zoning_minowa_test_5,
+                                              img_bounds_zoning_minowa_test_5,
+                                              {pane: 'pane_zoning_minowa_test_5'});
+        bounds_group.addLayer(layer_zoning_minowa_test_5);
+        map.createPane('pane_shuueki_minowa_test_6');
+        map.getPane('pane_shuueki_minowa_test_6').style.zIndex = 406;
+        var img_shuueki_minowa_test_6 = 'data/shuueki_minowa_test_6.png';
+        var img_bounds_shuueki_minowa_test_6 = [[35.87985355408642,137.89289508975907],[35.96270807471774,138.09109769912254]];
+        var layer_shuueki_minowa_test_6 = new L.imageOverlay(img_shuueki_minowa_test_6,
+                                              img_bounds_shuueki_minowa_test_6,
+                                              {pane: 'pane_shuueki_minowa_test_6'});
+        bounds_group.addLayer(layer_shuueki_minowa_test_6);
+        map.addLayer(layer_shuueki_minowa_test_6);
+        map.createPane('pane_saigai_minowa_test_7');
+        map.getPane('pane_saigai_minowa_test_7').style.zIndex = 407;
+        var img_saigai_minowa_test_7 = 'data/saigai_minowa_test_7.png';
+        var img_bounds_saigai_minowa_test_7 = [[35.87985355408642,137.89289508975907],[35.96270807471774,138.09109769912254]];
+        var layer_saigai_minowa_test_7 = new L.imageOverlay(img_saigai_minowa_test_7,
+                                              img_bounds_saigai_minowa_test_7,
+                                              {pane: 'pane_saigai_minowa_test_7'});
+        bounds_group.addLayer(layer_saigai_minowa_test_7);
+        map.addLayer(layer_saigai_minowa_test_7);
+        function pop_santi_jisuberi_8(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['CHIKUMEI'] !== null ? autolinker.link(feature.properties['CHIKUMEI'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['USERID'] !== null ? autolinker.link(feature.properties['USERID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['表示色'] !== null ? autolinker.link(feature.properties['表示色'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['塗り'] !== null ? autolinker.link(feature.properties['塗り'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['境界線色'] !== null ? autolinker.link(feature.properties['境界線色'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['境界線'] !== null ? autolinker.link(feature.properties['境界線'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['面積_M2_'] !== null ? autolinker.link(feature.properties['面積_M2_'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['周長_M_'] !== null ? autolinker.link(feature.properties['周長_M_'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['OBJECTID'] !== null ? autolinker.link(feature.properties['OBJECTID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['ZUKEI'] !== null ? autolinker.link(feature.properties['ZUKEI'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['KIKENC_1'] !== null ? autolinker.link(feature.properties['KIKENC_1'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['KIKENC_2'] !== null ? autolinker.link(feature.properties['KIKENC_2'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['KANRI'] !== null ? autolinker.link(feature.properties['KANRI'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['CHIHOJIM'] !== null ? autolinker.link(feature.properties['CHIHOJIM'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['SICHOSON'] !== null ? autolinker.link(feature.properties['SICHOSON'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['KYUSICHO'] !== null ? autolinker.link(feature.properties['KYUSICHO'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['OAZA'] !== null ? autolinker.link(feature.properties['OAZA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['AZA'] !== null ? autolinker.link(feature.properties['AZA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['KIKENC_3'] !== null ? autolinker.link(feature.properties['KIKENC_3'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['KIKENC_4'] !== null ? autolinker.link(feature.properties['KIKENC_4'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['BIKO'] !== null ? autolinker.link(feature.properties['BIKO'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['C_USER'] !== null ? autolinker.link(feature.properties['C_USER'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['C_DATE'] !== null ? autolinker.link(feature.properties['C_DATE'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['SHAPE_AR'] !== null ? autolinker.link(feature.properties['SHAPE_AR'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['SHAPE_LE'] !== null ? autolinker.link(feature.properties['SHAPE_LE'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['都道府'] !== null ? autolinker.link(feature.properties['都道府'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['地方事'] !== null ? autolinker.link(feature.properties['地方事'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['市町村名'] !== null ? autolinker.link(feature.properties['市町村名'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_santi_jisuberi_8_0() {
+            return {
+                pane: 'pane_santi_jisuberi_8',
+                opacity: 1,
+                color: 'rgba(11,247,15,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 3.0, 
+                fillOpacity: 0,
+                interactive: false,
+            }
+        }
+        map.createPane('pane_santi_jisuberi_8');
+        map.getPane('pane_santi_jisuberi_8').style.zIndex = 408;
+        map.getPane('pane_santi_jisuberi_8').style['mix-blend-mode'] = 'normal';
+        var layer_santi_jisuberi_8 = new L.geoJson(json_santi_jisuberi_8, {
+            attribution: '',
+            interactive: false,
+            dataVar: 'json_santi_jisuberi_8',
+            layerName: 'layer_santi_jisuberi_8',
+            pane: 'pane_santi_jisuberi_8',
+            onEachFeature: pop_santi_jisuberi_8,
+            style: style_santi_jisuberi_8_0,
+        });
+        bounds_group.addLayer(layer_santi_jisuberi_8);
+        function pop_santi_houkai_9(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['CHIKUMEI'] !== null ? autolinker.link(feature.properties['CHIKUMEI'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['USERID'] !== null ? autolinker.link(feature.properties['USERID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['表示色'] !== null ? autolinker.link(feature.properties['表示色'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['塗り'] !== null ? autolinker.link(feature.properties['塗り'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['境界線色'] !== null ? autolinker.link(feature.properties['境界線色'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['境界線'] !== null ? autolinker.link(feature.properties['境界線'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['面積_M2_'] !== null ? autolinker.link(feature.properties['面積_M2_'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['周長_M_'] !== null ? autolinker.link(feature.properties['周長_M_'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['OBJECTID'] !== null ? autolinker.link(feature.properties['OBJECTID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['ZUKEI'] !== null ? autolinker.link(feature.properties['ZUKEI'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['KIKENC_1'] !== null ? autolinker.link(feature.properties['KIKENC_1'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['KIKENC_2'] !== null ? autolinker.link(feature.properties['KIKENC_2'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['KANRI'] !== null ? autolinker.link(feature.properties['KANRI'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['CHIHOJIM'] !== null ? autolinker.link(feature.properties['CHIHOJIM'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['SICHOSON'] !== null ? autolinker.link(feature.properties['SICHOSON'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['KYUSICHO'] !== null ? autolinker.link(feature.properties['KYUSICHO'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['計画区'] !== null ? autolinker.link(feature.properties['計画区'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['地事名'] !== null ? autolinker.link(feature.properties['地事名'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['OAZA'] !== null ? autolinker.link(feature.properties['OAZA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['AZA'] !== null ? autolinker.link(feature.properties['AZA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['市町村名'] !== null ? autolinker.link(feature.properties['市町村名'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['KIKENC_3'] !== null ? autolinker.link(feature.properties['KIKENC_3'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['KIKENC_4'] !== null ? autolinker.link(feature.properties['KIKENC_4'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['林班'] !== null ? autolinker.link(feature.properties['林班'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['小班'] !== null ? autolinker.link(feature.properties['小班'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['BIKO'] !== null ? autolinker.link(feature.properties['BIKO'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['C_USER'] !== null ? autolinker.link(feature.properties['C_USER'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['C_DATE'] !== null ? autolinker.link(feature.properties['C_DATE'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['SHAPE_AR'] !== null ? autolinker.link(feature.properties['SHAPE_AR'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['SHAPE_LE'] !== null ? autolinker.link(feature.properties['SHAPE_LE'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['施業番号'] !== null ? autolinker.link(feature.properties['施業番号'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['保安林'] !== null ? autolinker.link(feature.properties['保安林'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['施業方_1'] !== null ? autolinker.link(feature.properties['施業方_1'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['その他制'] !== null ? autolinker.link(feature.properties['その他制'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['施業方_2'] !== null ? autolinker.link(feature.properties['施業方_2'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['樹種'] !== null ? autolinker.link(feature.properties['樹種'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['都道府'] !== null ? autolinker.link(feature.properties['都道府'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['地方事'] !== null ? autolinker.link(feature.properties['地方事'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['市町村名_2'] !== null ? autolinker.link(feature.properties['市町村名_2'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_santi_houkai_9_0() {
+            return {
+                pane: 'pane_santi_houkai_9',
+                opacity: 1,
+                color: 'rgba(255,166,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 3.0, 
+                fillOpacity: 0,
+                interactive: false,
+            }
+        }
+        map.createPane('pane_santi_houkai_9');
+        map.getPane('pane_santi_houkai_9').style.zIndex = 409;
+        map.getPane('pane_santi_houkai_9').style['mix-blend-mode'] = 'normal';
+        var layer_santi_houkai_9 = new L.geoJson(json_santi_houkai_9, {
+            attribution: '',
+            interactive: false,
+            dataVar: 'json_santi_houkai_9',
+            layerName: 'layer_santi_houkai_9',
+            pane: 'pane_santi_houkai_9',
+            onEachFeature: pop_santi_houkai_9,
+            style: style_santi_houkai_9_0,
+        });
+        bounds_group.addLayer(layer_santi_houkai_9);
+        function pop_santi_ryuushutu_10(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['CHIKUMEI'] !== null ? autolinker.link(feature.properties['CHIKUMEI'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['USERID'] !== null ? autolinker.link(feature.properties['USERID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['表示色'] !== null ? autolinker.link(feature.properties['表示色'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['線種'] !== null ? autolinker.link(feature.properties['線種'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['距離_M_'] !== null ? autolinker.link(feature.properties['距離_M_'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['OBJECTID'] !== null ? autolinker.link(feature.properties['OBJECTID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['ZUKEI'] !== null ? autolinker.link(feature.properties['ZUKEI'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['KIKENC_1'] !== null ? autolinker.link(feature.properties['KIKENC_1'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['KIKENC_2'] !== null ? autolinker.link(feature.properties['KIKENC_2'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['KANRI'] !== null ? autolinker.link(feature.properties['KANRI'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['CHIHOJIM'] !== null ? autolinker.link(feature.properties['CHIHOJIM'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['SICHOSON'] !== null ? autolinker.link(feature.properties['SICHOSON'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['KYUSICHO'] !== null ? autolinker.link(feature.properties['KYUSICHO'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['OAZA'] !== null ? autolinker.link(feature.properties['OAZA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['AZA'] !== null ? autolinker.link(feature.properties['AZA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['KIKENC_3'] !== null ? autolinker.link(feature.properties['KIKENC_3'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['KIKENC_4'] !== null ? autolinker.link(feature.properties['KIKENC_4'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['BIKO'] !== null ? autolinker.link(feature.properties['BIKO'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['C_USER'] !== null ? autolinker.link(feature.properties['C_USER'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['C_DATE'] !== null ? autolinker.link(feature.properties['C_DATE'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['SHAPE_LE'] !== null ? autolinker.link(feature.properties['SHAPE_LE'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['都道府'] !== null ? autolinker.link(feature.properties['都道府'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['地方事'] !== null ? autolinker.link(feature.properties['地方事'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['市町村名'] !== null ? autolinker.link(feature.properties['市町村名'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_santi_ryuushutu_10_0() {
+            return {
+                pane: 'pane_santi_ryuushutu_10',
+                opacity: 1,
+                color: 'rgba(13,7,4,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: false,
+            }
+        }
+        map.createPane('pane_santi_ryuushutu_10');
+        map.getPane('pane_santi_ryuushutu_10').style.zIndex = 410;
+        map.getPane('pane_santi_ryuushutu_10').style['mix-blend-mode'] = 'normal';
+        var layer_santi_ryuushutu_10 = new L.geoJson(json_santi_ryuushutu_10, {
+            attribution: '',
+            interactive: false,
+            dataVar: 'json_santi_ryuushutu_10',
+            layerName: 'layer_santi_ryuushutu_10',
+            pane: 'pane_santi_ryuushutu_10',
+            onEachFeature: pop_santi_ryuushutu_10,
+            style: style_santi_ryuushutu_10_0,
+        });
+        bounds_group.addLayer(layer_santi_ryuushutu_10);
+        function pop_kyuukeisha_11(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['区域名_1'] !== null ? autolinker.link(feature.properties['区域名_1'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['区域名_2'] !== null ? autolinker.link(feature.properties['区域名_2'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['告示年月'] !== null ? autolinker.link(feature.properties['告示年月'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['告示番号'] !== null ? autolinker.link(feature.properties['告示番号'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['市町村'] !== null ? autolinker.link(feature.properties['市町村'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['都道府'] !== null ? autolinker.link(feature.properties['都道府'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['地方事'] !== null ? autolinker.link(feature.properties['地方事'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['市町村名'] !== null ? autolinker.link(feature.properties['市町村名'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_kyuukeisha_11_0() {
+            return {
+                pane: 'pane_kyuukeisha_11',
+                opacity: 1,
+                color: 'rgba(238,82,175,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 3.0, 
+                fillOpacity: 0,
+                interactive: false,
+            }
+        }
+        map.createPane('pane_kyuukeisha_11');
+        map.getPane('pane_kyuukeisha_11').style.zIndex = 411;
+        map.getPane('pane_kyuukeisha_11').style['mix-blend-mode'] = 'normal';
+        var layer_kyuukeisha_11 = new L.geoJson(json_kyuukeisha_11, {
+            attribution: '',
+            interactive: false,
+            dataVar: 'json_kyuukeisha_11',
+            layerName: 'layer_kyuukeisha_11',
+            pane: 'pane_kyuukeisha_11',
+            onEachFeature: pop_kyuukeisha_11,
+            style: style_kyuukeisha_11_0,
+        });
+        bounds_group.addLayer(layer_kyuukeisha_11);
+        function pop_yellow_doshasaigaikeikaikuiki_12(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['現象'] !== null ? autolinker.link(feature.properties['現象'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['事務所'] !== null ? autolinker.link(feature.properties['事務所'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['区域番号'] !== null ? autolinker.link(feature.properties['区域番号'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['区域名'] !== null ? autolinker.link(feature.properties['区域名'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['PDF'] !== null ? autolinker.link(feature.properties['PDF'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['市町村'] !== null ? autolinker.link(feature.properties['市町村'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['YR'] !== null ? autolinker.link(feature.properties['YR'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['都道府'] !== null ? autolinker.link(feature.properties['都道府'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['地方事'] !== null ? autolinker.link(feature.properties['地方事'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['市町村名'] !== null ? autolinker.link(feature.properties['市町村名'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_yellow_doshasaigaikeikaikuiki_12_0() {
+            return {
+                pane: 'pane_yellow_doshasaigaikeikaikuiki_12',
+                opacity: 1,
+                color: 'rgba(253,250,97,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 4.0, 
+                fillOpacity: 0,
+                interactive: false,
+            }
+        }
+        map.createPane('pane_yellow_doshasaigaikeikaikuiki_12');
+        map.getPane('pane_yellow_doshasaigaikeikaikuiki_12').style.zIndex = 412;
+        map.getPane('pane_yellow_doshasaigaikeikaikuiki_12').style['mix-blend-mode'] = 'normal';
+        var layer_yellow_doshasaigaikeikaikuiki_12 = new L.geoJson(json_yellow_doshasaigaikeikaikuiki_12, {
+            attribution: '',
+            interactive: false,
+            dataVar: 'json_yellow_doshasaigaikeikaikuiki_12',
+            layerName: 'layer_yellow_doshasaigaikeikaikuiki_12',
+            pane: 'pane_yellow_doshasaigaikeikaikuiki_12',
+            onEachFeature: pop_yellow_doshasaigaikeikaikuiki_12,
+            style: style_yellow_doshasaigaikeikaikuiki_12_0,
+        });
+        bounds_group.addLayer(layer_yellow_doshasaigaikeikaikuiki_12);
+        function pop_red_doshasaigaitokubetukeikaikuiki_13(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['現象'] !== null ? autolinker.link(feature.properties['現象'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['事務所'] !== null ? autolinker.link(feature.properties['事務所'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['区域番号'] !== null ? autolinker.link(feature.properties['区域番号'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['区域名'] !== null ? autolinker.link(feature.properties['区域名'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['PDF'] !== null ? autolinker.link(feature.properties['PDF'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['市町村'] !== null ? autolinker.link(feature.properties['市町村'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['都道府'] !== null ? autolinker.link(feature.properties['都道府'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['地方事'] !== null ? autolinker.link(feature.properties['地方事'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['市町村名'] !== null ? autolinker.link(feature.properties['市町村名'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_red_doshasaigaitokubetukeikaikuiki_13_0() {
+            return {
+                pane: 'pane_red_doshasaigaitokubetukeikaikuiki_13',
+                opacity: 1,
+                color: 'rgba(255,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 4.0, 
+                fillOpacity: 0,
+                interactive: false,
+            }
+        }
+        map.createPane('pane_red_doshasaigaitokubetukeikaikuiki_13');
+        map.getPane('pane_red_doshasaigaitokubetukeikaikuiki_13').style.zIndex = 413;
+        map.getPane('pane_red_doshasaigaitokubetukeikaikuiki_13').style['mix-blend-mode'] = 'normal';
+        var layer_red_doshasaigaitokubetukeikaikuiki_13 = new L.geoJson(json_red_doshasaigaitokubetukeikaikuiki_13, {
+            attribution: '',
+            interactive: false,
+            dataVar: 'json_red_doshasaigaitokubetukeikaikuiki_13',
+            layerName: 'layer_red_doshasaigaitokubetukeikaikuiki_13',
+            pane: 'pane_red_doshasaigaitokubetukeikaikuiki_13',
+            onEachFeature: pop_red_doshasaigaitokubetukeikaikuiki_13,
+            style: style_red_doshasaigaitokubetukeikaikuiki_13_0,
+        });
+        bounds_group.addLayer(layer_red_doshasaigaitokubetukeikaikuiki_13);
+        function pop_sabousiteiti_14(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['指定地名'] !== null ? autolinker.link(feature.properties['指定地名'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['市町村'] !== null ? autolinker.link(feature.properties['市町村'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['告示年月'] !== null ? autolinker.link(feature.properties['告示年月'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['告示番号'] !== null ? autolinker.link(feature.properties['告示番号'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['都道府'] !== null ? autolinker.link(feature.properties['都道府'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['地方事'] !== null ? autolinker.link(feature.properties['地方事'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['市町村名'] !== null ? autolinker.link(feature.properties['市町村名'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_sabousiteiti_14_0() {
+            return {
+                pane: 'pane_sabousiteiti_14',
+                opacity: 1,
+                color: 'rgba(11,100,15,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 3.0, 
+                fillOpacity: 0,
+                interactive: false,
+            }
+        }
+        map.createPane('pane_sabousiteiti_14');
+        map.getPane('pane_sabousiteiti_14').style.zIndex = 414;
+        map.getPane('pane_sabousiteiti_14').style['mix-blend-mode'] = 'normal';
+        var layer_sabousiteiti_14 = new L.geoJson(json_sabousiteiti_14, {
+            attribution: '',
+            interactive: false,
+            dataVar: 'json_sabousiteiti_14',
+            layerName: 'layer_sabousiteiti_14',
+            pane: 'pane_sabousiteiti_14',
+            onEachFeature: pop_sabousiteiti_14,
+            style: style_sabousiteiti_14_0,
+        });
+        bounds_group.addLayer(layer_sabousiteiti_14);
+        function pop_kamiina_15(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['都道府'] !== null ? autolinker.link(feature.properties['都道府'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['地方事'] !== null ? autolinker.link(feature.properties['地方事'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['市町村名'] !== null ? autolinker.link(feature.properties['市町村名'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_kamiina_15_0() {
+            return {
+                pane: 'pane_kamiina_15',
+                opacity: 1,
+                color: 'rgba(186,66,164,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fillOpacity: 0,
+                interactive: false,
+            }
+        }
+        map.createPane('pane_kamiina_15');
+        map.getPane('pane_kamiina_15').style.zIndex = 415;
+        map.getPane('pane_kamiina_15').style['mix-blend-mode'] = 'normal';
+        var layer_kamiina_15 = new L.geoJson(json_kamiina_15, {
+            attribution: '',
+            interactive: false,
+            dataVar: 'json_kamiina_15',
+            layerName: 'layer_kamiina_15',
+            pane: 'pane_kamiina_15',
+            onEachFeature: pop_kamiina_15,
+            style: style_kamiina_15_0,
+        });
+        bounds_group.addLayer(layer_kamiina_15);
+        map.addLayer(layer_kamiina_15);
+        var baseMaps = {};
+        L.control.layers(baseMaps,{'<img src="legend/kamiina_15.png" /> kamiina': layer_kamiina_15,'<img src="legend/sabousiteiti_14.png" /> sabousiteiti': layer_sabousiteiti_14,'<img src="legend/red_doshasaigaitokubetukeikaikuiki_13.png" /> red_doshasaigaitokubetukeikaikuiki': layer_red_doshasaigaitokubetukeikaikuiki_13,'<img src="legend/yellow_doshasaigaikeikaikuiki_12.png" /> yellow_doshasaigaikeikaikuiki': layer_yellow_doshasaigaikeikaikuiki_12,'<img src="legend/kyuukeisha_11.png" /> kyuukeisha': layer_kyuukeisha_11,'<img src="legend/santi_ryuushutu_10.png" /> santi_ryuushutu': layer_santi_ryuushutu_10,'<img src="legend/santi_houkai_9.png" /> santi_houkai': layer_santi_houkai_9,'<img src="legend/santi_jisuberi_8.png" /> santi_jisuberi': layer_santi_jisuberi_8,"saigai_minowa_test": layer_saigai_minowa_test_7,"shuueki_minowa_test": layer_shuueki_minowa_test_6,"zoning_minowa_test": layer_zoning_minowa_test_5,"地すべり地形分布図": layer__4,"シームレス地質図": layer__3,"長野県CS立体図": layer_CS_2,"ベースマップ航空写真": layer__1,"地理院淡色地図": layer__0,}).addTo(map);
+        setBounds();
+        L.ImageOverlay.include({
+            getBounds: function () {
+                return this._bounds;
+            }
+        });
+        resetLabels([layer_sabousiteiti_14]);
+        map.on("zoomend", function(){
+            resetLabels([layer_sabousiteiti_14]);
+        });
+        map.on("layeradd", function(){
+            resetLabels([layer_sabousiteiti_14]);
+        });
+        map.on("layerremove", function(){
+            resetLabels([layer_sabousiteiti_14]);
+        });
+        </script>
+    </body>
+</html>
